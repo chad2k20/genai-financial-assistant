@@ -1,8 +1,17 @@
 
 # GenAI-Powered Financial Insights Assistant
 
-## 📌 Overview
-This project is a prototype **GenAI-powered assistant** that provides personalized financial insights based on transaction data and natural language queries.
+Table of Contents
+
+1.Project Overview
+2.Agent Design: Inputs, Outputs, Prompts
+3.User Stories (5) — 3C format
+4.Test Cases (20) — 4 per story (≥5 negative)
+5.Story ↔ TestCase mapping (CSV table)
+6.Architecture Diagram (Mermaid)
+7.Deployment Guide (Azure + GitHub + Docker + CI/CD)
+8.README content for repo
+9.Learnings & Challenges
 
 ### ✨ Features
 - Accepts **natural language prompts** (e.g., "How much did I spend on groceries last month?")
