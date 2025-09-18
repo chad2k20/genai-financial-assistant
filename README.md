@@ -8,7 +8,7 @@
 3. User Stories (5) — 3C format
 4. Test Cases (20) — 4 per story (≥5 negative)
 5. Story ↔ TestCase mapping (CSV table)
-6. Architecture Diagram (Mermaid)
+6. Architecture Diagram 
 7. Deployment Guide (Azure + GitHub + Docker + CI/CD)
 8. README content for repo
 9. Learnings & Challenges
@@ -98,72 +98,64 @@
 
 ## 3) User Stories (5) — Card, Conversation, Confirmation (3C)
 
-### Story 1 — Customer: Monthly Category Summary
+User Story 1 — Customer: Spending Summary
 
-**Card:** As a customer, I want to ask natural language questions like "How much did I spend on groceries last month?" so I can understand my monthly spending by category.
+Card: As a customer, I want to ask “How much did I spend on groceries last month?” so that I can track my budget.
 
-**Conversation:**
+Conversation:
+User enters a natural query in plain English.
+System fetches transactions categorized under groceries.
+GenAI agent summarizes spending.
 
-* Customer: "How much did I spend on groceries last month?"
-* System: "Do you mean calendar month of August 2025 or the last 30 days?"
-* Customer: "August 2025"
-* System: (Fetches transactions, aggregates) "You spent ₹12,400 on groceries in August 2025 — that's up 8% vs July. Top merchants: BigMart (₹4,200), GreenGrocer (₹3,100). Would you like saving tips or to set a budget?"
+Confirmation:
+The system returns total grocery spending for the requested month.
 
-**Confirmation:** System provides a summary, top merchants, percent change vs previous month and asks whether to create a weekly budget rule.
+User Story 2 — Customer: Savings Suggestions
 
----
+Card: As a customer, I want to receive saving tips based on my spending patterns so that I can reduce unnecessary expenses.
 
-### Story 2 — Customer: Trend & Alerts
+Conversation:
+System analyzes recurring expenses and categories.
+GenAI agent generates personalized tips.
 
-**Card:** As a customer, I want to get notified about unusual spending trends so I can take corrective action quickly.
+Confirmation:
+At least 2 actionable suggestions are displayed (e.g., reduce dining out, use offers).
 
-**Conversation:**
 
-* Customer: "Alert me if my monthly dining spend increases by more than 20% versus previous month."
-* System: "Alert rule saved. I'll notify you if monthly dining spend rises 20%+ compared to previous month. Would you like email, SMS, or in-app notification?"
+User Story 3 — Financial Analyst: Trend Analysis
 
-**Confirmation:** User receives an alert message containing delta %, sample transactions causing the spike, and actionable tips.
+Card: As a financial analyst, I want to view a trend of monthly spending across categories so that I can identify overspending behavior.
 
----
+Conversation:
+Analyst inputs a request for trend analysis.
+System aggregates category-wise spending over 6 months.
+GenAI agent provides insights.
 
-### Story 3 — Analyst: Export & Reproducible Report
+Confirmation:
+Line chart or table is generated with at least 3 months’ comparison.
 
-**Card:** As a financial analyst, I want to export a GenAI-generated report (PDF + CSV) for a user’s selected time range so I can include it in monthly reviews.
+User Story 4 — Developer: Data Export
 
-**Conversation:**
+Card: As a developer, I want to export financial insights to CSV/PDF so that they can be shared with other systems or stakeholders.
 
-* Analyst: "Generate a PDF report of Jan–Mar 2025 for account A123 with category breakdown and top 10 merchants."
-* System: (Generates) "Report ready: \[Download PDF] \[Download CSV]. Would you like charts included?"
+Conversation:
+User clicks “Export Report.”
+System packages insights into CSV or PDF.
 
-**Confirmation:** The system provides downloadable attachments and a short summary; analyst confirms the content and closes the request.
+Confirmation:
+The file downloads successfully and contains the insights shown on screen.
 
----
+User Story 5 — Customer: Budget Alerts
 
-### Story 4 — Developer: Model Provider Swap
+Card: As a customer, I want to get alerts when I exceed my monthly budget so that I can control my expenses.
 
-**Card:** As a developer, I want the assistant to support swapping the GenAI provider (OpenAI ↔ Azure OpenAI ↔ On-prem) through configuration so I can choose based on cost & latency.
+Conversation:
+Customer sets a budget limit.
+System monitors transactions in real time.
+Webhook/alert triggers when limit exceeded.
 
-**Conversation:**
-
-* Developer: "Switch default model provider to Azure OpenAI (gpt-4o-mini)."
-* System: "Provider switched to Azure OpenAI — gpt-4o-mini. Please deploy the updated config to staging to validate."
-
-**Confirmation:** The system runs a smoke test (sample query), returns success/failure logs, and confirms the provider swap.
-
----
-
-### Story 5 — Customer: Savings Recommendation & Rule Creation
-
-**Card:** As a customer, I want the assistant to suggest personalized saving actions (e.g., round-up transfers, recurring transfers) and optionally create the rule when I approve.
-
-**Conversation:**
-
-* Customer: "Help me save on groceries."
-* System: (Analyzes spend) "You spend ₹12,400/month on groceries. Here are 3 actions: 1) Set budget to ₹10,000, 2) Auto-transfer ₹1,000/week to savings, 3) Subscribe to bulk offers. Create action 2?"
-* Customer: "Yes, create it."
-* System: "Rule created: Auto-transfer ₹1,000/week to Savings. Active from Sep 20, 2025."
-
-**Confirmation:** The system shows the created rule and next run date/time.
+Confirmation:
+User receives notification (email, SMS, or in-app).
 
 ---
 
@@ -363,75 +355,31 @@ S1,Monthly Category Summary,TC1.1
 S1,Monthly Category Summary,TC1.2
 S1,Monthly Category Summary,TC1.3
 S1,Monthly Category Summary,TC1.4
-S2,Trend & Alerts,TC2.1
-S2,Trend & Alerts,TC2.2
-S2,Trend & Alerts,TC2.3
-S2,Trend & Alerts,TC2.4
-S3,Export & Report,TC3.1
-S3,Export & Report,TC3.2
-S3,Export & Report,TC3.3
-S3,Export & Report,TC3.4
-S4,Model Provider Swap,TC4.1
-S4,Model Provider Swap,TC4.2
-S4,Model Provider Swap,TC4.3
-S4,Model Provider Swap,TC4.4
-S5,Savings Recommendation,TC5.1
-S5,Savings Recommendation,TC5.2
-S5,Savings Recommendation,TC5.3
-S5,Savings Recommendation,TC5.4
+S2,Merchant Drilldown,TC2.1
+S2,Merchant Drilldown,TC2.2
+S2,Merchant Drilldown,TC2.3
+S2,Merchant Drilldown,TC2.4
+S3,Budget Recommendations,TC3.1
+S3,Budget Recommendations,TC3.2
+S3,Budget Recommendations,TC3.3
+S3,Budget Recommendations,TC3.4
+S4,API & Webhook Integration,TC4.1
+S4,API & Webhook Integration,TC4.2
+S4,API & Webhook Integration,TC4.3
+S4,API & Webhook Integration,TC4.4
+S5,Compliance & Data Export,TC5.1
+S5,Compliance & Data Export,TC5.2
+S5,Compliance & Data Export,TC5.3
+S5,Compliance & Data Export,TC5.4
 ```
 
 > You can copy the CSV into a spreadsheet to create the mapping sheet. Consider adding columns later: priority, owner, estimate, status.
 
----
 
-## 6) Architecture Diagram (Mermaid)
 
-```mermaid
-flowchart LR
-  subgraph UI
-    Browser[Web UI / Mobile]
-  end
-  subgraph API
-    Gateway[API Gateway / App Service]
-    Auth[(Auth Service / KeyVault)]
-  end
-  subgraph Backend
-    Ingest[Transaction Ingest]
-    ETL[ETL & Pre-aggregation]
-    Analytics[Analytics Service]
-    Agent[GenAI Agent Service]
-    Storage[(Encrypted Blob / SQL)]
-    Jobs[Scheduler]
-  end
-  subgraph Model
-    Provider[GenAI Provider (Azure/OpenAI/On-Prem)]
-  end
+# 7) Deployment Guide (Azure + GitHub + Docker + CI/CD)
 
-  Browser -->|Query + Upload CSV| Gateway
-  Gateway --> Auth
-  Gateway --> Ingest
-  Ingest --> Storage
-  ETL --> Storage
-  Gateway --> Analytics
-  Analytics --> Agent
-  Agent --> Provider
-  Provider --> Agent
-  Agent --> Gateway
-  Jobs --> Analytics
-  Analytics --> Gateway
-```
-
-**Notes:**
-
-* Store secrets in Azure Key Vault.
-* Use Azure App Service or Azure Container Apps for hosting the API, Azure Blob Storage for transactions, Azure Functions for scheduled jobs, and Azure OpenAI for model calls.
-
----
-
-## 7) Deployment Guide (Azure + GitHub + Docker + CI/CD)
-
-### Repo layout (suggested)
+# Repo layout (suggested)
 
 ```
 /
@@ -453,89 +401,17 @@ flowchart LR
     .github/workflows/ci-cd.yml
 ```
 
-### Quick setup (developer)
+# 8) Learnings & Challenges
 
-1. Fork the repo and clone: `git clone git@github.com:<you>/<repo>.git`
-2. Create an Azure resource group: `az group create -n finance-assistant-rg -l eastus`
-3. Provision resources (example using Bicep/Terraform): storage account, app service, key vault, azure openai resource (if using Azure)
-4. Add secrets to Key Vault (MODEL\_KEY, DB\_CONN)
-5. Build Docker images: `docker build -t finance-backend ./backend`
-6. Push to ACR (Azure Container Registry) or Docker Hub
-7. Deploy to Azure Container Apps or App Service using image from registry
-
-### CI/CD (GitHub Actions example)
-
-* Workflow triggers on push to main
-* Steps: checkout, run tests, build Docker images, push to registry, run infra deployment, update container app
-* Protect secrets via GitHub Secrets (AZURE\_CREDENTIALS, ACR\_USERNAME, ACR\_PASSWORD)
-
-### Sample GitHub Actions (summary)
-
-```yaml
-name: CI-CD
-on: [push]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build backend
-        run: docker build -t ${{ secrets.ACR_NAME }}/finance-backend:latest ./backend
-      - name: Login to ACR
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.ACR_NAME }}.azurecr.io
-          username: ${{ secrets.ACR_USER }}
-          password: ${{ secrets.ACR_PASS }}
-      - name: Push image
-        run: docker push ${{ secrets.ACR_NAME }}.azurecr.io/finance-backend:latest
-      - name: Deploy to Azure
-        uses: azure/cli@v1
-        with:
-          inlineScript: |
-            az webapp config container set --name ${{ secrets.WEBAPP_NAME }} --resource-group finance-assistant-rg --docker-custom-image-name ${{ secrets.ACR_NAME }}.azurecr.io/finance-backend:latest
-```
-
-### Access URL
-
-* After deployment, the app will be accessible at the App Service URL: `https://<your-app-name>.azurewebsites.net`
-* Document the final URL in the README after deployment.
+* Prompt engineering:** Constrain model output to strict JSON to avoid hallucinations; use a validation / schema enforcement layer
+* Data privacy:** Minimize what goes to the model — prefer aggregated stats instead of raw transactions
+* Scalability:** Pre-aggregation for common queries (daily/monthly/category) reduces model context size and latency
+* Testing LLM outputs:** Create tests that validate schema, numeric accuracy, and plausibility rather than exact text
+* CI/CD complexities:** Rotating secrets and multi-provider deployments require robust secret management and staging environments
 
 ---
 
-## 8) README (to include in repo root)
-
-**Title:** GenAI Financial Insights Assistant
-
-**Overview:** Short project description, tech stack, quickstart, and contact.
-
-**Quickstart:**
-
-1. Clone repo
-2. Add secrets to Key Vault / GitHub secrets
-3. Build & run with Docker-compose (for local dev)
-4. Run tests
-5. Deploy via GitHub Actions
-
-**Files:**
-
-* `docs/user_stories.md` — 3C formatted user stories
-* `docs/tests.md` — test cases
-* `docs/deploy.md` — deployment steps
-
----
-
-## 9) Learnings & Challenges
-
-* **Prompt engineering:** Constrain model output to strict JSON to avoid hallucinations; use a validation / schema enforcement layer
-* **Data privacy:** Minimize what goes to the model — prefer aggregated stats instead of raw transactions
-* **Scalability:** Pre-aggregation for common queries (daily/monthly/category) reduces model context size and latency
-* **Testing LLM outputs:** Create tests that validate schema, numeric accuracy, and plausibility rather than exact text
-* **CI/CD complexities:** Rotating secrets and multi-provider deployments require robust secret management and staging environments
-
----
-
-## Appendices
+# Appendices
 
 * **Appendix A:** Sample API endpoints
 
