@@ -1,1 +1,28 @@
+##Query Types
+The chat assistant can handle various types of financial queries:
 
+Income Analysis: Questions about your income and earnings
+Spending Analysis: Questions about your spending patterns and expenses
+Savings Analysis: Questions about your savings rate and potential
+Budget Recommendations: Personalized budget advice based on your spending patterns
+Forecast Queries: Questions about predicted future spending
+Transaction Queries: Questions about recent transactions
+Category Analysis: Questions about spending in specific categories
+Time Period Analysis: Questions about spending over different time periods (daily, weekly, monthly, yearly)
+
+
+##Example Questions
+Here are some examples of questions you can ask the chat assistant:
+
+"What's my monthly income?"
+"How much do I spend each month?"
+"What's my savings rate?"
+"Give me budget recommendations"
+"What's my forecast for next month?"
+"Show me my recent transactions"
+"How much do I spend on groceries?"
+"What's my annual spending?"
+"What are my top spending categories?"
+"How much do I spend per week?"
+"Am I spending too much on entertainment?"
+"How has my spending changed over time?"
